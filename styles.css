@@ -28,13 +28,12 @@ label{
 
 .container{
     min-width: 225px;
-    width:30%;
     
     padding: 20px;
 }
 
 .container, #details{
-    margin: 0.5vw 5vw;
+    margin: 10px 5vw;
     background-color: transparent;
     -webkit-backdrop-filter: brightness(0.7) blur(4px);
     backdrop-filter: brightness(0.7) blur(4px);
@@ -72,4 +71,14 @@ input,  button {
   .message.strong{
       font-size: xxx-large;
       text-transform: uppercase;
+  }
+
+  @media (max-height:600px),(max-width:600px) {
+      body{
+          font-size: 1rem;
+      }
+ 
+      .message.strong{
+          font-size: 1.7rem;
+      }
   }

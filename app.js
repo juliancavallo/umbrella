@@ -24,24 +24,6 @@ function loadFile(path, callback){
     xobj.send();  
 }
 
-document.getElementById("submitBtn").addEventListener("click", async ()  => {
-    const responseMessage = document.getElementById("response");
-    responseMessage.innerHTML = "Loading..."
-
-    const location = document.getElementById("location").value.trim();
-    
-    const apiResponse = await getApiInfo(location)
-
-    responseMessage.innerHTML = apiResponse.message;
-
-    if(apiResponse.status == "OK"){
-        details.innerHTML = apiResponse.details.city;
-        details.appendChild(apiResponse.details.img);
-    } else {
-        details.innerHTML = "";
-    }
-});
-
 
 async function getApiInfo(location){
     const promise = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
@@ -78,4 +60,34 @@ function getMessageByWeatherId(id){
     const match = weatherCodes.find(x => x.ids.includes(id));
     const messages = messageResponses.find(x => x.type == match.type).messages;
     return messages[Math.floor(Math.random() * messages.length)];
+}
+
+
+document.getElementById("submitBtn").addEventListener("click", async ()  => {
+    getLocationData();
+});
+
+document.getElementById("location").addEventListener("keyup", (e) => {
+    if(e.code == "Enter")
+        getLocationData();
+});
+
+async function getLocationData(){
+    const responseMessage = document.getElementById("response");
+    responseMessage.innerHTML = "Loading..."
+
+    const location = document.getElementById("location").value.trim();
+    
+    const apiResponse = await getApiInfo(location)
+
+    responseMessage.innerHTML = apiResponse.message;
+
+    if(apiResponse.status == "OK"){
+        details.innerHTML = apiResponse.details.city;
+        details.appendChild(apiResponse.details.img);
+    } else {
+        details.innerHTML = "";
+    }
+
+    document.getElementById("location").value = "";
 }
