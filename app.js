@@ -28,7 +28,7 @@ function loadFile(path, callback){
 }
 
 async function getApiKey(){
-    const promise = await fetch(`${protocol}://apikey-server.herokuapp.com//key?name=openweather`);
+    const promise = await fetch(`${protocol}://apikey-server.herokuapp.com/key?name=openweather`);
     const data = await promise.json();
     apiKey = data.key;
 }
