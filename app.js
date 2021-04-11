@@ -1,9 +1,11 @@
 const possibleResults = {};
-const apiKey = config.apiKey;
+let apiKey = "";
 let weatherCodes = [];
 let messageResponses = [];
 
 (function(){
+    getApiKey();
+
     loadFile('./resources/weather-codes.json', (response) => {
         weatherCodes = JSON.parse(response);
     });
@@ -24,6 +26,11 @@ function loadFile(path, callback){
     xobj.send();  
 }
 
+async function getApiKey(){
+    const promise = await fetch('http://127.0.0.1:3000/key?name=openweather');
+    const data = await promise.json();
+    apiKey = data.key;
+}
 
 async function getApiInfo(location){
     const promise = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
