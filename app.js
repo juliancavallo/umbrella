@@ -2,6 +2,7 @@ const possibleResults = {};
 let apiKey = "";
 let weatherCodes = [];
 let messageResponses = [];
+const protocol = location.protocol.replace(':','');
 
 (function(){
     getApiKey();
@@ -27,13 +28,13 @@ function loadFile(path, callback){
 }
 
 async function getApiKey(){
-    const promise = await fetch('http://127.0.0.1:3000/key?name=openweather');
+    const promise = await fetch(`${protocol}://127.0.0.1:3000/key?name=openweather`);
     const data = await promise.json();
     apiKey = data.key;
 }
 
 async function getApiInfo(location){
-    const promise = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
+    const promise = await fetch(`${protocol}://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
     const data = await promise.json();
 
     if(promise.status != 200)
@@ -47,7 +48,7 @@ async function getApiInfo(location){
 
 function formatResponse(data){
     const weather = data.weather[0];
-    const iconUrl = `http://openweathermap.org/img/wn/${weather.icon}@2x.png`;
+    const iconUrl = `${protocol}://openweathermap.org/img/wn/${weather.icon}@2x.png`;
     const img = document.createElement("img");
     img.src = iconUrl;
 
