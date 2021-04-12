@@ -2,7 +2,6 @@ const possibleResults = {};
 let apiKey = "";
 let weatherCodes = [];
 let messageResponses = [];
-const protocol = location.protocol.replace(':','');
 
 (function(){
     getApiKey();
@@ -28,13 +27,13 @@ function loadFile(path, callback){
 }
 
 async function getApiKey(){
-    const promise = await fetch(`${protocol}://apikey-server.herokuapp.com/key?name=openweather`);
+    const promise = await fetch(`https://apikey-server.herokuapp.com/key?name=openweather`);
     const data = await promise.json();
     apiKey = data.key;
 }
 
 async function getApiInfo(location){
-    const promise = await fetch(`${protocol}://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
+    const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
     const data = await promise.json();
 
     if(promise.status != 200)
@@ -48,7 +47,7 @@ async function getApiInfo(location){
 
 function formatResponse(data){
     const weather = data.weather[0];
-    const iconUrl = `${protocol}://openweathermap.org/img/wn/${weather.icon}@2x.png`;
+    const iconUrl = `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;
     const img = document.createElement("img");
     img.src = iconUrl;
 
