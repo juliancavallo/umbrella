@@ -9,10 +9,14 @@ To run it locally, I reccomend you to get and API key from the weather API provi
 To get an API key, you need to create an account in [Open Weather Map](https://openweathermap.org/) (you can select the free subscription), go to My API keys, and click on Generate on the key that appears in the screen.
 
 Then, copy the key and paste it at the beginning of the app.js file, in the declaration of the apiKey const. The line of code should look like this:
-let apiKey = "your-api-key";
+`let apiKey = "your-api-key";`
 
-Also, you must comment or delete the line where we call the getApiKey() function, so it doesn't get the api key from the server. Otherwise, the app will throw an error because it will going to make an api call without the proper certificate.
+Also, you must comment or delete the line where we call the getApiKey() function, in the app.js file, so it doesn't get the api key from the server. Otherwise, the app will throw an error because it will going to make an api call without the proper certificate.
 
+`(function(){
+    //getApiKey();
+    ...
+`
 
 ## Messages
 All the messages shown are in the **resources/message-responses.json** file. You can modify it to add your custom messages
