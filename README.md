@@ -6,6 +6,8 @@ This page shows an advice to take an umbrella, based on weather conditions.
 ## API key
 To run it locally, I reccomend you to get and API key from the weather API provider. I use a key retrieved from my own Node.js server hosted in Heroku, but it will only work if you run the project with an SSL certificate. If you use Live Server with VS Code, it will run without this certificate.
 
+Also, my server provides the key only if you make the api call from my portfolio domain, so it will not work from any local environment
+
 To get an API key, you need to create an account in [Open Weather Map](https://openweathermap.org/) (you can select the free subscription), go to My API keys, and click on Generate on the key that appears in the screen.
 
 Then, copy the key and paste it at the beginning of the app.js file, in the declaration of the apiKey const. The line of code should look like this:
