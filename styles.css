@@ -26,13 +26,22 @@ label{
     font-weight: bold;
 }
 
-.container{
-    min-width: 225px;
-    
-    padding: 20px;
+
+#details{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#details:empty{
+    padding:0;
 }
 
 .container, #details{
+    padding: 15px;
+    min-width: 250px;
+    width: 30vw;
     margin: 10px 5vw;
     background-color: transparent;
     -webkit-backdrop-filter: brightness(0.7) blur(4px);
@@ -62,15 +71,12 @@ input,  button {
       color: white;
   }
 
- .message {
-      display: flex;
-      align-items: center;
-      padding: 0px 20px;
-  }
 
-  .message.strong{
-      font-size: xxx-large;
-      text-transform: uppercase;
+  .message{
+    display: flex;
+    align-items: center;
+    font-size: xxx-large;
+    text-transform: uppercase;
   }
 
   @media (max-height:600px),(max-width:600px) {
@@ -78,7 +84,7 @@ input,  button {
           font-size: 1rem;
       }
  
-      .message.strong{
+      .message{
           font-size: 1.7rem;
       }
   }

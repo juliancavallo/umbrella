@@ -33,7 +33,7 @@ async function getApiKey(){
 }
 
 async function getApiInfo(location){
-    const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
+    const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`);
     const data = await promise.json();
 
     if(promise.status != 200)
@@ -42,11 +42,13 @@ async function getApiInfo(location){
             message: data.message
         };
     else
-        return formatResponse(data)
+        return jsonResponse(data)
 }
 
-function formatResponse(data){
+function jsonResponse(data){
     const weather = data.weather[0];
+    const temp = data.main.temp.toFixed(1) + ' °C';
+
     const iconUrl = `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;
     const img = document.createElement("img");
     img.src = iconUrl;
@@ -58,7 +60,8 @@ function formatResponse(data){
             message: message,
             details:{
                 city: data.name + ", " + data.sys.country,
-                img
+                img,
+                temp
             }
     };
 }
@@ -92,6 +95,7 @@ async function getLocationData(){
     if(apiResponse.status == "OK"){
         details.innerHTML = apiResponse.details.city;
         details.appendChild(apiResponse.details.img);
+        details.innerHTML += apiResponse.details.temp;
     } else {
         details.innerHTML = "";
     }
