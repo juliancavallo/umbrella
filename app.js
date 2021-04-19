@@ -6,6 +6,8 @@ let messageResponses = [];
 (function(){
     getApiKey();
 
+    loadCountrySelect();
+
     loadFile('./resources/weather-codes.json', (response) => {
         weatherCodes = JSON.parse(response);
     });
@@ -14,6 +16,26 @@ let messageResponses = [];
         messageResponses = JSON.parse(response);
     });
 })();
+
+
+async function loadCountrySelect(){
+    const promise = await fetch(`https://restcountries.eu/rest/v2/all`);
+    const data = await promise.json();
+    const countries = data.map(x => ({name: x.name, code: x.alpha2Code}));
+    
+    let select = document.getElementById("countries");
+    let placeHolder = document.createElement("option");
+    placeHolder.id = "empty";
+    placeHolder.innerHTML = "...";
+    select.appendChild(placeHolder);
+
+    for(let c of countries){
+        let option = document.createElement("option");
+        option.value = c.code;
+        option.innerHTML = c.name;
+        select.appendChild(option);
+    }
+}
 
 function loadFile(path, callback){
     var xobj = new XMLHttpRequest();
@@ -72,22 +94,21 @@ function getMessageByWeatherId(id){
     return messages[Math.floor(Math.random() * messages.length)];
 }
 
-
-document.getElementById("submitBtn").addEventListener("click", async ()  => {
-    getLocationData();
-});
-
-document.getElementById("location").addEventListener("keyup", (e) => {
-    if(e.code == "Enter")
-        getLocationData();
-});
-
 async function getLocationData(){
     const responseMessage = document.getElementById("response");
     responseMessage.innerHTML = "Loading..."
 
-    const location = document.getElementById("location").value.trim();
-    
+    let location = document.getElementById("location").value.trim();
+
+    if(location){
+    const countryOptions = document.getElementById("countries").options;
+    const countryIndex = document.getElementById("countries").selectedIndex;
+    const countryValue = countryOptions[countryIndex].value;
+
+    if(countryValue != "empty")
+        location += "," + countryValue;
+    }
+
     const apiResponse = await getApiInfo(location)
 
     responseMessage.innerHTML = apiResponse.message;
@@ -102,3 +123,13 @@ async function getLocationData(){
 
     document.getElementById("location").value = "";
 }
+
+
+document.getElementById("submitBtn").addEventListener("click", async ()  => {
+    getLocationData();
+});
+
+document.getElementById("location").addEventListener("keyup", (e) => {
+    if(e.code == "Enter")
+        getLocationData();
+});
