@@ -2,30 +2,25 @@
     {
         "type":"heavy",
         "messages":[
-            "Yes, and bring the big one",
-            "Absolutely, and take your rain boots also",
-            "Definitely"
+            "Yes"
         ]
     },
     {
         "type":"medium",
         "messages":[
-            "Yes, you can take me later",
-            "Please, you don't wanna come home soaked again"
+            "Yes"
         ]
     },
     {
         "type":"light",
         "messages":[
-            "Yes, just in case",
-            "It will rain only if you don't take your umbrella, so yes, take it"
+            "Yes"
         ]
     },
     {
         "type":"clear",
         "messages":[
-            "Luckily not, enjoy your day :)",
-            "Definitely not"
+            "No"
         ]
     }
     

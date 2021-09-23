@@ -15,17 +15,27 @@ let messageResponses = [];
     loadFile('./resources/message-responses.json', (response) => {
         messageResponses = JSON.parse(response);
     });
+
+    $(document).ready(function() {
+        $('#countries').select2();
+    });
 })();
 
 
 async function loadCountrySelect(){
-    const promise = await fetch(`https://restcountries.eu/rest/v2/all`);
+    const promise = await fetch(`https://restcountries.com/v3/all`);
     const data = await promise.json();
-    const countries = data.map(x => ({name: x.name, code: x.alpha2Code}));
+    let countries = data.map(x => ({name: x.name.common, code: x.cca2}));
     
+    countries.sort(function(a, b){
+        if(a.name < b.name) { return -1; }
+        if(a.name > b.name) { return 1; }
+        return 0;
+    })
+
     let select = document.getElementById("countries");
     let placeHolder = document.createElement("option");
-    placeHolder.id = "empty";
+    placeHolder.value = "empty";
     placeHolder.innerHTML = "...";
     select.appendChild(placeHolder);
 
@@ -101,12 +111,10 @@ async function getLocationData(){
     let location = document.getElementById("location").value.trim();
 
     if(location){
-    const countryOptions = document.getElementById("countries").options;
-    const countryIndex = document.getElementById("countries").selectedIndex;
-    const countryValue = countryOptions[countryIndex].value;
+        const countryValue = document.getElementById("countries").value;
 
-    if(countryValue != "empty")
-        location += "," + countryValue;
+        if(countryValue != "empty")
+            location += "," + countryValue;
     }
 
     const apiResponse = await getApiInfo(location)

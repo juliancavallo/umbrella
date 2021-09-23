@@ -41,7 +41,7 @@ label{
 .container, #details{
     padding: 15px;
     min-width: 250px;
-    width: 30vw;
+    width: 50vw;
     margin: 10px 5vw;
     background-color: transparent;
     -webkit-backdrop-filter: brightness(0.7) blur(4px);
@@ -52,11 +52,42 @@ label{
 .city-select{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-input{
-    width: 70%;
+.select2-container{
+    margin: auto !important;
+}
+
+#location, .select2{
+    width: 48% !important;
+    min-width: 200px !important;
+}
+
+#location{
+    cursor: text;
+}
+
+button, #countries{
+    cursor: pointer;
+}
+
+.select2-selection{
+    height: 100% !important;
+    border-radius: 10px !important;
+    border: 0px !important;
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.select2-container{
+    padding: 0 !important;
+}
+
+.select2-dropdown{
+    border-radius: 10px !important;
 }
 
 select{
@@ -65,7 +96,7 @@ select{
     min-width: 70px;
 }
 
-input, button, select {
+input, button, .select2 {
     margin: 10px 0px;
     outline: none;
     padding: 8px;
@@ -75,32 +106,31 @@ input, button, select {
     font-weight: bold;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-  }
+}
   
-  button{
-        width: 100%;
-      cursor: pointer;
-  }
+button{
+    width: 100%;
+}
 
-  button:hover{
-      background-color: #303030;
-      color: white;
-  }
+button:hover{
+    background-color: #303030;
+    color: white;
+}
 
 
-  .message{
+.message{
     display: flex;
     align-items: center;
     font-size: xxx-large;
     text-transform: uppercase;
-  }
+}
 
-  @media (max-height:600px),(max-width:600px) {
-      body{
-          font-size: 1rem;
-      }
- 
-      .message{
-          font-size: 1.7rem;
-      }
-  }
+@media (max-height:600px),(max-width:600px) {
+    body{
+        font-size: 1rem;
+    }
+
+    .message{
+        font-size: 1.7rem;
+    }
+}

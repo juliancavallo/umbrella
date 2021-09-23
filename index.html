@@ -8,6 +8,9 @@
     <link rel="icon" href="images/umbrella.svg">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
     <h1>Do I need an umbrella?</h1>
@@ -15,8 +18,8 @@
     <div class="container">
         <span> <label for="location">Location</label></span>
         <div class="city-select">
-            <input type="text" id="location" placeholder="Search by city">
-            <select name="countries" id="countries"></select>
+            <input type="text" id="location" placeholder="Search city">
+            <select name="countries" id="countries" ></select>
         </div>
         <button id="submitBtn">Submit</button>
     </div>
