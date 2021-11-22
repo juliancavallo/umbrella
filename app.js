@@ -121,11 +121,14 @@ async function getLocationData(){
 
     responseMessage.innerHTML = apiResponse.message;
 
-    if(apiResponse.status == "OK"){
+    if(apiResponse.status == "OK") {
         details.innerHTML = apiResponse.details.city;
         details.appendChild(apiResponse.details.img);
         details.innerHTML += apiResponse.details.temp;
     } else {
+        if(location)
+            responseMessage.innerHTML = "An error occurred while retrieving the weather data. Please try again in a few seconds.";
+
         details.innerHTML = "";
     }
 
