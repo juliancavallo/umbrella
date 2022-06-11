@@ -1,5 +1,5 @@
 # umbrella
-Created with OpenWeatherMap API
+Created with OpenWeatherMap API, published at https://juliancavallo.github.io/umbrella/
 
 This page shows an advice to take an umbrella, based on weather conditions.
 
